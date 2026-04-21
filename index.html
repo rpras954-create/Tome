@@ -3,21 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>น้องเป้อ - รับทำป้าย </title>
+    <title>อรั้ยเป้อ - รับทำป้าย </title>
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Palette สีที่กำหนด (เน้นโทนมืด) */
-            --bg-dark: #0D1433;       /* สีซ้ายสุด - พื้นหลังหลัก */
-            --deep-blue: #171F55;     /* สีที่สอง - พื้นหลังการ์ด/ส่วนประกอบ */
-            --dark-blue: #274272;     /* สีที่สาม - ส่วนฟุ้งกลางจอ / ขอบ */
-            --primary-blue: #6C90C3;  /* สีขวาสุด - จุดเน้น / ปุ่ม */
-            
-            --text-light: #F0F5FF;
-            --text-dim: #A0B3D9;
-            --shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
-            --border-color: rgba(108, 144, 195, 0.3);
-            --alert-red: #FF5252;
+            /* ปรับพาเลทสีใหม่: แดงหลัก > ดำ > ทอง */
+            --primary-red: #D32F2F;
+            --dark-red: #8B0000;
+            --deep-black: #000000;
+            --bg-dark: #120000;
+            --gold-shine: #FFD700;
+            --gold-gradient: linear-gradient(45deg, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
+            --text-white: #FFFFFF;
+            --accent-gold: #FFD700;
+            --shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
+            --status-bg: #4B0000;
+            --highlight-red: #FF5252;
+            --alert-red: #FF1744;
+            --step-bg: #1A0000;
         }
 
         * {
@@ -28,11 +32,11 @@
         }
 
         body {
-            /* พื้นหลังสีมืดซ้ายสุด และฟุ้งตรงกลางด้วยสีที่สาม */
+            /* พื้นหลังเน้นโทนแดงเข้มไปดำ */
             background-color: var(--bg-dark);
-            background-image: radial-gradient(circle at center, var(--dark-blue) 0%, var(--bg-dark) 70%);
+            background-image: radial-gradient(circle at center, #4B0000 0%, #000000 80%);
             background-attachment: fixed;
-            color: var(--text-light);
+            color: var(--text-white);
             line-height: 1.6;
             overflow-x: hidden;
             min-height: 100vh;
@@ -53,15 +57,15 @@
         .floating-emoji {
             position: absolute;
             font-size: 1.5rem;
-            opacity: 0.3;
+            opacity: 0.6;
             animation: floatUp 10s linear infinite;
             bottom: -50px;
         }
 
         @keyframes floatUp {
             0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.3; }
-            90% { opacity: 0.3; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
             100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
         }
 
@@ -83,21 +87,24 @@
         /* --- Header (Hidden) --- */
         header { display: none; }
 
-        /* --- Cute Top Feature --- */
+        /* --- Cute Top Feature (Red & Gold) --- */
         .cute-top-border {
             width: 100%;
             height: 50px;
-            background: var(--deep-blue);
+            background: linear-gradient(90deg, var(--dark-red), var(--primary-red), var(--dark-red));
+            border-bottom: 2px solid var(--gold-shine);
             position: relative;
             margin-bottom: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
+            color: var(--gold-shine);
+            font-weight: bold;
             font-size: 1.1rem;
             letter-spacing: 5px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 15px rgba(255, 0, 0, 0.4);
             z-index: 10;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
         }
 
         .cute-top-border::after {
@@ -107,7 +114,7 @@
             left: 0;
             width: 100%;
             height: 15px;
-            background: radial-gradient(circle at 10px -4px, transparent 12px, var(--deep-blue) 13px);
+            background: radial-gradient(circle at 10px -4px, transparent 12px, var(--dark-red) 13px);
             background-size: 20px 40px;
         }
 
@@ -123,19 +130,19 @@
         .badge-item {
             width: 45px;
             height: 45px;
-            background: var(--deep-blue);
+            background: #200000;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
             font-size: 1.2rem;
-            border: 2px solid var(--primary-blue);
+            border: 2px solid var(--primary-red);
             cursor: pointer;
             transition: transform 0.2s;
         }
 
-        .badge-item:hover { transform: scale(1.1); }
+        .badge-item:hover { transform: scale(1.1); border-color: var(--gold-shine); box-shadow: 0 0 15px var(--gold-shine); }
 
         /* --- Status Bar Section --- */
         .status-section {
@@ -146,17 +153,17 @@
         .status-bar-container {
             max-width: 600px;
             margin: 0 auto;
-            background: var(--deep-blue);
+            background: #000;
             border-radius: 50px;
-            padding: 5px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            padding: 4px;
+            border: 2px solid var(--primary-red);
+            box-shadow: 0 0 20px rgba(139, 0, 0, 0.5);
             position: relative;
             overflow: hidden;
-            border: 1px solid var(--border-color);
         }
 
         .status-progress {
-            background: linear-gradient(90deg, var(--bg-dark), var(--primary-blue));
+            background: linear-gradient(90deg, var(--dark-red), #FF1744, var(--dark-red));
             height: 35px;
             border-radius: 50px;
             width: 100%; 
@@ -168,6 +175,7 @@
             font-size: 0.85rem;
             font-weight: 500;
             padding: 0 15px;
+            border: 1px solid var(--gold-shine);
         }
 
         /* --- Dashed Queue Button --- */
@@ -176,19 +184,20 @@
             max-width: 250px;
             margin: 15px auto;
             padding: 10px 20px;
-            border: 2px dashed var(--primary-blue);
+            border: 2px dashed var(--gold-shine);
             border-radius: 15px;
             text-align: center;
             text-decoration: none;
-            color: var(--primary-blue);
+            color: var(--gold-shine);
             font-weight: 500;
-            background: rgba(23, 31, 85, 0.4);
+            background: rgba(139, 0, 0, 0.2);
             transition: all 0.3s;
         }
 
         .btn-check-queue:hover {
-            background: var(--primary-blue);
-            color: var(--bg-dark);
+            background: var(--gold-gradient);
+            color: black;
+            border-style: solid;
         }
 
         /* --- Profile Header Section --- */
@@ -203,15 +212,15 @@
         .cover-image {
             width: 100%;
             aspect-ratio: 16 / 9;
-            background: url('https://i.postimg.cc/mrstN3gK/ca5cadf1fedbcb5c270a32137f30ee55.jpg') center/cover no-repeat;
+            background: url('https://i.postimg.cc/xThpPC6z/mi-m-ch-x-732-20260421140601.png') center/cover no-repeat;
             border-radius: 30px;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            box-shadow: var(--shadow);
+            box-shadow: 0 0 25px rgba(211, 47, 47, 0.6);
             position: relative;
-            border: 2px solid var(--border-color);
+            border: 4px solid var(--dark-red);
         }
 
         .profile-box {
@@ -226,10 +235,10 @@
         .profile-inner {
             width: 100%;
             height: 100%;
-            background-color: var(--deep-blue);
-            border: 6px solid var(--deep-blue);
+            background-color: #000;
+            border: 5px solid var(--primary-red);
             border-radius: 35px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            box-shadow: 0 0 20px var(--gold-shine);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -251,34 +260,47 @@
         }
 
         .info-card {
-            background: var(--deep-blue);
+            background: rgba(30, 0, 0, 0.9);
             backdrop-filter: blur(5px);
             border-radius: 30px;
             padding: 25px;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--border-color);
+            box-shadow: 0 0 30px rgba(0,0,0,0.8);
+            border: 3px solid var(--primary-red);
             text-align: center;
+            position: relative;
+        }
+
+        .info-card::before {
+            content: "";
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            border-radius: 30px;
+            border: 1px solid var(--gold-shine);
+            pointer-events: none;
+            opacity: 0.5;
         }
 
         .info-card-title {
-            color: var(--primary-blue);
+            color: var(--gold-shine);
             margin-bottom: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
             font-size: 1.2rem;
+            text-shadow: 0 0 10px var(--gold-shine);
         }
 
         .time-badge {
-            background: var(--primary-blue);
+            background: linear-gradient(45deg, var(--dark-red), var(--primary-red));
             padding: 6px 20px;
             border-radius: 20px;
             font-size: 0.85rem;
             display: inline-block;
             margin-top: 15px;
-            color: var(--bg-dark);
-            font-weight: 600;
+            color: white;
+            border: 1px solid var(--gold-shine);
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
         }
 
         /* --- Category Tabs --- */
@@ -291,23 +313,24 @@
         }
 
         .cat-tab {
-            background: var(--deep-blue);
-            color: var(--text-light);
+            background: #000;
+            color: var(--primary-red);
             padding: 8px 20px;
             border-radius: 30px;
             cursor: pointer;
             font-size: 0.9rem;
-            border: 2px solid var(--primary-blue);
+            border: 2px solid var(--primary-red);
             transition: all 0.3s ease;
         }
 
         .cat-tab.active {
-            background: var(--primary-blue);
-            color: var(--bg-dark);
-            box-shadow: 0 5px 15px rgba(108, 144, 195, 0.4);
+            background: var(--primary-red);
+            color: white;
+            box-shadow: 0 0 20px rgba(211, 47, 47, 0.6);
+            border-color: var(--gold-shine);
         }
 
-        /* --- Product Grid --- */
+        /* --- New Product Grid --- */
         .product-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -318,19 +341,20 @@
         }
 
         .product-card {
-            background: var(--deep-blue);
+            background: #1a0000;
             border-radius: 25px;
             padding: 10px;
             text-align: center;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s ease;
-            border: 1px solid var(--border-color);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+            transition: all 0.3s ease;
+            border: 2px solid var(--dark-red);
             overflow: hidden;
         }
 
         .product-card:hover {
             transform: translateY(-5px);
-            border-color: var(--primary-blue);
+            border-color: var(--gold-shine);
+            box-shadow: 0 0 15px var(--gold-shine);
         }
 
         .product-img-real {
@@ -340,23 +364,26 @@
             border-radius: 20px;
             margin-bottom: 10px;
             display: block;
+            border: 1px solid rgba(255, 215, 0, 0.2);
         }
 
         .product-link-btn {
             display: block;
-            color: var(--text-light);
+            color: var(--gold-shine);
             font-weight: 500;
             font-size: 1rem;
             text-decoration: none;
             padding: 10px;
-            background: var(--dark-blue);
+            background: #000;
             border-radius: 15px;
             transition: background 0.2s;
+            border: 1px solid var(--primary-red);
         }
 
         .product-link-btn:hover {
-            background: var(--primary-blue);
-            color: var(--bg-dark);
+            background: var(--primary-red);
+            color: white;
+            border-color: var(--gold-shine);
         }
 
         /* --- Detail Pages Styling --- */
@@ -370,7 +397,7 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            color: var(--primary-blue);
+            color: var(--gold-shine);
             text-decoration: none;
             font-weight: 500;
             margin-bottom: 20px;
@@ -378,43 +405,55 @@
         }
 
         .article-card {
-            background: var(--deep-blue);
+            background: #0a0000;
             border-radius: 40px;
             padding: 40px;
-            box-shadow: var(--shadow);
+            box-shadow: 0 0 30px rgba(0,0,0,1);
             margin-bottom: 30px;
-            border: 1px solid var(--border-color);
+            border: 3px solid var(--primary-red);
+            position: relative;
+        }
+
+        .article-card::before {
+            content: "";
+            position: absolute;
+            top: 5px; left: 5px; right: 5px; bottom: 5px;
+            border: 1px solid var(--gold-shine);
+            border-radius: 35px;
+            pointer-events: none;
+            opacity: 0.3;
         }
 
         .article-title {
-            color: var(--primary-blue);
+            color: var(--gold-shine);
             font-size: 2rem;
             margin-bottom: 20px;
             text-align: center;
+            text-shadow: 0 0 10px var(--gold-shine);
         }
 
         /* --- Rules Page Specific --- */
         .rule-list { list-style: none; margin-top: 15px; }
         .rule-item {
-            background: var(--dark-blue);
+            background: #200000;
             padding: 15px;
             border-radius: 15px;
             margin-bottom: 10px;
-            border-left: 5px solid var(--primary-blue);
+            border-left: 5px solid var(--primary-red);
             font-size: 0.95rem;
-            color: var(--text-light);
+            color: #ddd;
         }
         .highlight-box {
-            background: rgba(108, 144, 195, 0.1);
-            border: 1px solid var(--primary-blue);
+            background: #300000;
+            border: 1px solid var(--gold-shine);
             padding: 20px;
             border-radius: 20px;
             margin: 20px 0;
         }
         .danger-box {
-            background: rgba(255, 82, 82, 0.1);
-            border: 1px dashed var(--alert-red);
-            color: #FF8A8A;
+            background: #4B0000;
+            border: 1px dashed var(--gold-shine);
+            color: #FF5252;
             padding: 15px;
             border-radius: 15px;
             text-align: center;
@@ -431,26 +470,27 @@
         }
 
         .order-step-card {
-            background: var(--dark-blue);
+            background: #1a0000;
             border-radius: 25px;
             padding: 20px;
             display: flex;
             gap: 15px;
             align-items: flex-start;
-            border: 1px solid var(--border-color);
+            border: 1px solid var(--dark-red);
         }
 
         .step-num {
-            background: var(--primary-blue);
-            color: var(--bg-dark);
+            background: var(--gold-gradient);
+            color: black;
             width: 35px;
             height: 35px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
+            font-weight: bold;
             flex-shrink: 0;
+            box-shadow: 0 0 10px var(--gold-shine);
         }
 
         .order-grid-links {
@@ -462,30 +502,31 @@
 
         .order-link-item {
             aspect-ratio: 1 / 1;
-            background: var(--deep-blue);
-            border: 2px solid var(--primary-blue);
+            background: #000;
+            border: 2px solid var(--primary-red);
             border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             text-decoration: none;
-            color: var(--primary-blue);
+            color: var(--gold-shine);
             font-weight: 500;
             transition: all 0.3s;
             text-align: center;
         }
 
         .order-link-item:hover {
-            background: var(--primary-blue);
-            color: var(--bg-dark);
+            background: var(--dark-red);
+            color: white;
             transform: scale(1.05);
+            border-color: var(--gold-shine);
         }
 
         footer {
             text-align: center;
             padding: 40px;
-            color: var(--text-dim);
-            opacity: 0.6;
+            color: var(--primary-red);
+            opacity: 0.7;
             font-size: 0.8rem;
         }
 
@@ -502,15 +543,16 @@
     <div id="emoji-container"></div>
 
     <div class="cute-top-border">
-        <span>☁️☁️☁️☁️☁️</span>
+        <span>✨️💥🌟🐦‍🔥🎗🧧</span>
     </div>
 
+    <!-- VIEW 1: HOME PAGE -->
     <div id="home-view" class="page-view page-active">
         <div class="badge-container">
-            <div class="badge-item">💙</div>
-            <div class="badge-item">💼</div>
             <div class="badge-item">✨️</div>
-            <div class="badge-item">📦</div>
+            <div class="badge-item">💥</div>
+            <div class="badge-item">🌟</div>
+            <div class="badge-item">🐦‍🔥</div>
         </div>
 
         <div class="status-section">
@@ -524,7 +566,7 @@
             <div class="cover-image"></div>
             <div class="profile-box" onclick="showView('home')">
                 <div class="profile-inner">
-                    <img src="https://i.postimg.cc/2SjzHmJX/ba0f15a84d8b042d4b269b548f2cc757.jpg" alt="Profile">
+                    <img src="https://i.postimg.cc/NMDP8knh/mi-m-ch-x-733-20260421140820.png" alt="Profile">
                 </div>
             </div>
         </section>
@@ -532,7 +574,7 @@
         <section class="customer-info-section">
             <div class="info-card">
                 <h3 class="info-card-title">📍 ยินดีต้อนรับสู่อาณาจักรเป้อ♡︎</h3>
-                <div style="font-size: 0.95rem;">
+                <div style="font-size: 0.95rem; color: #eee;">
                     อย่าลืมอ่านกฎ และวิธีสั่งนะคะ<br>
                     ราคาแต่ละงานไม่เท่ากัน เริ่ม 40-299<br>
                     สามารถสอบถามได้ตลอดเลยค่ะ
@@ -550,53 +592,66 @@
                 <div class="cat-tab" onclick="showView('order-detail')">วิธีสั่ง</div>
             </div>
 
-            <h2 style="text-align: center; margin-bottom: 25px; color: var(--primary-blue); font-size: 1.2rem;">แนวงานที่รับทั้งหมด</h2>
+            <h2 style="text-align: center; margin-bottom: 25px; color: var(--gold-shine); font-size: 1.2rem; text-shadow: 0 0 5px var(--gold-shine);">แนวงานที่รับทั้งหมด</h2>
 
+            <!-- Grid 2 Columns -->
             <div class="product-grid" id="product-grid">
+                <!-- 1 -->
                 <div class="product-card">
                     <img src="https://i.postimg.cc/mDxhj0yB/mi-m-ch-x-89-20260416220230.png" class="product-img-real">
                     <a href="https://drive.google.com/drive/folders/1LUDNOpLgvTbU0evdFBrlsjHTGSzvqJlR" target="_blank" class="product-link-btn">Scribbles</a>
                 </div>
+                <!-- 2 -->
                 <div class="product-card">
                     <img src="https://i.postimg.cc/gcxmjMVN/mi-m-ch-x-89-20260416220916.png" class="product-img-real">
                     <a href="https://drive.google.com/drive/folders/1K4QG1OzY-Ghaeci1AxKokaA_knOUdPeX" target="_blank" class="product-link-btn">เจลลี่</a>
                 </div>
+                <!-- 3 -->
                 <div class="product-card">
                     <img src="https://i.postimg.cc/Hkq7vcpJ/mi-m-ch-x-86-20251207150122.png" class="product-img-real">
                     <a href="https://drive.google.com/drive/folders/16Df5soa167eWxrrufa8wR3tsDjHCqUmy" target="_blank" class="product-link-btn">UFO</a>
                 </div>
+                <!-- 4 -->
                 <div class="product-card">
                     <img src="https://i.postimg.cc/2SRzP4B4/mi-m-ch-x-89-20251023183651.png" class="product-img-real">
                     <a href="https://drive.google.com/drive/folders/165OmNuimFEeFFR2fkRGlFdNFF0jmEL-p" target="_blank" class="product-link-btn">คุณชิ</a>
                 </div>
+                <!-- 5 -->
                 <div class="product-card">
                     <img src="https://i.postimg.cc/Xq5vCxCg/mi-m-ch-x-89-20251231095206.png" class="product-img-real">
                     <a href="https://drive.google.com/drive/folders/16CcFfhbYMgJ2s-84o383iKku70vZaOf1" target="_blank" class="product-link-btn">โทนมืด</a>
                 </div>
+                <!-- 6 -->
                 <div class="product-card">
                     <img src="https://i.postimg.cc/W3RC4nTK/mi-m-ch-x-89-20260117162237.png" class="product-img-real">
                     <a href="https://drive.google.com/drive/folders/1ApeGZ98Tkayg96cxpxEe7fvYO0vJn5ZX" target="_blank" class="product-link-btn">โทนสว่าง</a>
                 </div>
+                <!-- 7 -->
                 <div class="product-card">
                     <img src="https://i.postimg.cc/PqqYwsrz/mi-m-ch-x-89-20251016233007.png" class="product-img-real">
                     <a href="https://drive.google.com/drive/folders/15yFLCq9hQ6xFryRIJ1zzpakEQ7KfOwtF" target="_blank" class="product-link-btn">ซากุระ</a>
                 </div>
+                <!-- 8 -->
                 <div class="product-card">
                     <img src="https://i.postimg.cc/RqrNs2BP/mi-m-ch-x-89-20260228214920.png" class="product-img-real">
                     <a href="https://drive.google.com/drive/folders/1jZURNhoMnWBPWK9VRPDayfKuNpKcQPES" target="_blank" class="product-link-btn">น่ารัก1</a>
                 </div>
+                <!-- 9 -->
                 <div class="product-card">
                     <img src="https://i.postimg.cc/ryRGjkGD/mi-m-ch-x-86-20250817111921.png" class="product-img-real">
                     <a href="https://drive.google.com/drive/folders/1xS7M-2SqfI4_ixFNGl6As9CIcL4ZVTUt" target="_blank" class="product-link-btn">น่ารัก2</a>
                 </div>
+                <!-- 10 -->
                 <div class="product-card">
                     <img src="https://i.postimg.cc/NFxjDFdq/mi-m-ch-x-656-di-r-bka-rk-kh-nlae-w-20260410121516.png" class="product-img-real">
                     <a href="https://drive.google.com/drive/folders/1wEw5ooGaa1WmIlg12FxPsil0Ppmu8H7k" target="_blank" class="product-link-btn">เฮด</a>
                 </div>
+                <!-- 11 -->
                 <div class="product-card">
                     <img src="https://i.postimg.cc/52CmtMyj/mi-m-ch-x-89-20251016233003.png" class="product-img-real">
                     <a href="https://drive.google.com/drive/folders/1k5lFQJnKDCDjq6amT7lOsHhxvAeEAfML" target="_blank" class="product-link-btn">เรียบ</a>
                 </div>
+                <!-- 12 -->
                 <div class="product-card">
                     <img src="https://i.postimg.cc/DZg9YG3C/mi-m-ch-x-89-20251108133013.png" class="product-img-real">
                     <a href="https://drive.google.com/drive/folders/1FI2X0ThP9kTrIuAdUsgRwUkdvscCWLLj" target="_blank" class="product-link-btn">โปรไฟล์</a>
@@ -605,6 +660,7 @@
         </section>
     </div>
 
+    <!-- VIEW 2: RULES PAGE -->
     <div id="rules-detail-view" class="page-view">
         <div class="detail-page-content">
             <div class="back-button" onclick="showView('home')"><span>←</span> กลับหน้าหลัก</div>
@@ -612,7 +668,7 @@
                 <h1 class="article-title" style="font-size: 1.6rem;">กฎการสั่งงานของทางร้านเป้อ</h1>
                 <div class="article-body">
                     <div class="highlight-box">
-                        <p style="font-size: 0.95rem; line-height: 1.8;">
+                        <p style="font-size: 0.95rem; line-height: 1.8; color: #fff;">
                             ค่อนข้างยาวแต่อยากให้อ่านเพราะร้านเจอคนมาหลายรูปแบบ<br>
                             <strong>โอนเงิน = เริ่มงานและยอมรับกฎของทางร้าน</strong> แนะนำอ่านให้ครบ
                         </p>
@@ -631,11 +687,16 @@
                     <div class="danger-box">
                         <strong>สำคัญมากๆ : ไม่รับคืนเงินทุกกรณี โอนคือยอมรับกฎของร้าน</strong>
                     </div>
+
+                    <p style="text-align: center; margin-top: 20px; font-size: 0.9rem; color: var(--gold-shine);">
+                        สงสัยตรงไหนถามนะคะ แม่ค้าไม่กัด พร้อมตอบมากค่ะ ♡︎
+                    </p>
                 </div>
             </article>
         </div>
     </div>
 
+    <!-- VIEW 3: ORDER METHOD -->
     <div id="order-detail-view" class="page-view">
         <div class="detail-page-content">
             <div class="back-button" onclick="showView('home')"><span>←</span> กลับหน้าหลัก</div>
@@ -653,22 +714,22 @@
                         <div class="order-step-card">
                             <div class="step-num">1</div>
                             <div class="step-content">
-                                <b style="color:var(--primary-blue)">แจ้งแนวป้ายและจำนวน</b>
-                                <p>เลือกแนวงานจากหน้าหลักที่ต้องการสั่ง</p>
+                                <b style="color:var(--gold-shine)">แจ้งแนวป้ายและจำนวน</b>
+                                <p style="color: #ccc;">เลือกแนวงานจากหน้าหลักที่ต้องการสั่ง</p>
                             </div>
                         </div>
                         <div class="order-step-card">
                             <div class="step-num">2</div>
                             <div class="step-content">
-                                <b style="color:var(--primary-blue)">เลือกองค์ประกอบ</b>
-                                <p>เลือกตูน/ของตกแต่ง/บล็อค จากลิ้งค์ด้านบน แล้วส่งบรีฟได้เลยค่ะ</p>
+                                <b style="color:var(--gold-shine)">เลือกองค์ประกอบ</b>
+                                <p style="color: #ccc;">เลือกตูน/ของตกแต่ง/บล็อค จากลิ้งค์ด้านบน แล้วส่งบรีฟได้เลยค่ะ</p>
                             </div>
                         </div>
                         <div class="order-step-card">
                             <div class="step-num">3</div>
                             <div class="step-content">
-                                <b style="color:var(--primary-blue)">ชำระเงิน</b>
-                                <p>แจ้งสลิปเพื่อเริ่มคิวงาน รอรับงานภายใน 24 ชม. ค่ะ</p>
+                                <b style="color:var(--gold-shine)">ชำระเงิน</b>
+                                <p style="color: #ccc;">แจ้งสลิปเพื่อเริ่มคิวงาน รอรับงานภายใน 24 ชม. ค่ะ</p>
                             </div>
                         </div>
                     </div>
@@ -678,7 +739,7 @@
     </div>
 
     <footer>
-        <p>© 2024 เป้อ Shop - Deep Blue Palette ♡</p>
+        <p>ไม่ตัดงาน แคปงาน เซฟงานไปหาพิกัดหรือให้ร้านอื่นทำนะคะ พบเจอปรับ!</p>
     </footer>
 
     <script>
@@ -702,7 +763,7 @@
 
         function createEmoji() {
             const container = document.getElementById('emoji-container');
-            const emojis = ['💙', '✨', '☁️', '❄️', '💎', '⭐'];
+            const emojis = ['✨️', '💥', '🌟', '🐦‍🔥', '🎗', '🧧'];
             const emoji = document.createElement('div');
             emoji.className = 'floating-emoji';
             emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
@@ -721,9 +782,9 @@
         }
 
         window.onload = function() {
-            setInterval(createEmoji, 2000);
+            setInterval(createEmoji, 1500);
         };
     </script>
 
 </body>
-</html>
+    </html>
